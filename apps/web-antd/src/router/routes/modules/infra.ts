@@ -25,6 +25,24 @@ const routes: RouteRecordRaw[] = [
       hideInMenu: true,
     },
   },
+  {
+    path: '/infra/blood-collection-fact',
+    component: () => import('#/views/infra/bloodCollectionFact/index.vue'),
+    name: 'BloodCollectionFact',
+    meta: {
+      title: '供血数据查询',
+      icon: 'ant-design:file-text-outlined',
+    },
+  },
+  {
+    path: '/infra/blood-supply-fact',
+    component: () => import('#/views/infra/bloodSupplyFact/index.vue'),
+    name: 'BloodSupplyFact',
+    meta: {
+      title: '采血数据查询',
+      icon: 'ant-design:file-text-outlined',
+    },
+  },
 ];
 
 export default routes;

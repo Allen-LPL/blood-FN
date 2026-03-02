@@ -69,7 +69,7 @@ async function loadAreaTree(): Promise<void> {
   try {
     loading.value = true;
     const data = await getAreaTree();
-    
+
     // 根据 level 限制层级
     areaTree.value = filterTreeByLevel(data || [], props.level);
   } catch (error) {
@@ -83,10 +83,10 @@ async function loadAreaTree(): Promise<void> {
 // 根据层级过滤树形数据
 function filterTreeByLevel(tree: AreaVO[], maxLevel: number): AreaVO[] {
   if (maxLevel <= 0) return [];
-  
+
   return tree.map((node) => {
     const newNode = { ...node };
-    
+
     // 如果当前是最后一层,移除 children
     if (maxLevel === 1) {
       delete newNode.children;
@@ -94,7 +94,7 @@ function filterTreeByLevel(tree: AreaVO[], maxLevel: number): AreaVO[] {
       // 递归处理子节点
       newNode.children = filterTreeByLevel(node.children, maxLevel - 1);
     }
-    
+
     return newNode;
   });
 }
@@ -106,7 +106,7 @@ function handleChange(value: number[] | undefined): void {
     emit('update:value', undefined);
     return;
   }
-  
+
   emit('update:modelValue', value);
   emit('update:value', value);
 }
@@ -114,12 +114,12 @@ function handleChange(value: number[] | undefined): void {
 // 同步 modelValue 或 value 到内部选中值
 function syncSelectedValue(): void {
   const newValue = props.modelValue || props.value;
-  
+
   if (newValue === undefined || newValue === null) {
     selectedValue.value = undefined;
     return;
   }
-  
+
   // 确保是数组格式
   if (Array.isArray(newValue)) {
     selectedValue.value = newValue as number[];
@@ -129,7 +129,9 @@ function syncSelectedValue(): void {
 }
 
 // 监听 modelValue 和 value 变化
-watch(() => props.modelValue || props.value, syncSelectedValue, { immediate: true });
+watch(() => props.modelValue || props.value, syncSelectedValue, {
+  immediate: true,
+});
 
 // 组件挂载时加载数据
 onMounted(async () => {

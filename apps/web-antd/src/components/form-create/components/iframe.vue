@@ -36,7 +36,9 @@ interface Props {
 }
 
 // 显示的 URL（优先使用 url prop，其次使用 value 或 modelValue）
-const displayUrl = computed(() => props.url || props.value || props.modelValue || '');
+const displayUrl = computed(
+  () => props.url || props.value || props.modelValue || '',
+);
 
 // 是否显示预览
 const showPreview = computed(() => {
@@ -84,9 +86,9 @@ function isValidUrl(url: string): boolean {
 }
 
 .iframe-preview {
+  overflow: hidden;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  overflow: hidden;
 }
 
 .iframe-content {
@@ -99,9 +101,8 @@ function isValidUrl(url: string): boolean {
   align-items: center;
   justify-content: center;
   min-height: 200px;
+  background-color: #fafafa;
   border: 1px dashed #d9d9d9;
   border-radius: 4px;
-  background-color: #fafafa;
 }
 </style>
-

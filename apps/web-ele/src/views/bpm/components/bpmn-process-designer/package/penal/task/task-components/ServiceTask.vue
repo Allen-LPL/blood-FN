@@ -206,9 +206,9 @@ const updateHttpExtensions = (force = false) => {
 
     const persisted = HTTP_BOOLEAN_FIELDS.has(name)
       ? String(!!rawValue)
-      : (rawValue === undefined
+      : rawValue === undefined
         ? ''
-        : rawValue.toString());
+        : rawValue.toString();
 
     desiredEntries.push([name, persisted]);
   });
